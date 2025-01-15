@@ -16,3 +16,17 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+@font-face {
+  font-family: 'Butler';
+  src: url('./fonts/Butler_Bold.otf') format('otf');
+  font-weight: 400; /* Adjust based on font weight */
+  font-style: normal; /* Adjust based on font style */
+}
+
+@font-face {
+  font-family: 'MADE Tommy Soft';
+  src: url('./fonts/MADE Tommy Soft Regular PERSONAL USE.otf') format('otf');
+  font-weight: 400; /* Adjust based on font weight */
+  font-style: normal; /* Adjust based on font style */
+}

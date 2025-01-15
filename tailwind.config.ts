@@ -5,9 +5,14 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{html,js}', // Update based on your project structure
   ],
   theme: {
     extend: {
+      fontFamily: {
+        butler: ['Butler', 'serif'], // Fallback to serif
+        tommy: ['MADE Tommy Soft', 'serif'],
+      },
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',
       },
@@ -17,6 +22,16 @@ const config: Config = {
           500: '#0070F3',
           600: '#2F6FEB',
         },
+        transparent: 'transparent',
+        current: 'currentColor',
+        'beige-background': '#FCFAF4',
+        'light-brown': '#E9E6D7',
+        'button-white': '#FFFAE8',
+        'light-purple': '#C3B2E7',
+        'steel-blue': '#B8CEDC',
+        'pink': '#F682A5',
+        'dark-yellow': '#FFC963',
+        'dark-orange': '#F9A474',
       },
     },
     keyframes: {
@@ -29,4 +44,5 @@ const config: Config = {
   },
   plugins: [require('@tailwindcss/forms')],
 };
+
 export default config;
