@@ -7,7 +7,7 @@ export default function Login() {
                         <div className="w-24 h-24 bg-white flex items-center mb-3 mt-3 justify-center rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                       d="M12 12c2.209 0 4-1.791 4-4s-1.791-4-4-4-4 1.791-4 4 1.791 4 4 4zm0 2c-2.761 0-8 1.405-8 4v2h16v-2c0-2.595-5.239-4-8-4z"/>
                             </svg>
                         </div>

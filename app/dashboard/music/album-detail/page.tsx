@@ -4,7 +4,7 @@ export default function Page() {
     return (
         <div className="space-y-8 lg:space-y-14 bg-beige-background">
             <div className="flex flex-row justify-end">
-                <div className="rounded-lg p-4 dark:bg-black dark:shadow-white w-screen">
+                <div className="rounded-lg p-4 w-screen">
                     <div className="flex flex-col justify-center items-center">
                         <img className="rounded-lg aspect-square w-64 mt-16"
                              src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d5/37/f0/d537f0d1-5cfd-ce67-d7ac-0c4151f63f70/23UMGIM17915.rgb.jpg/1200x1200bb.jpg"/>

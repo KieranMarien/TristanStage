@@ -18,8 +18,8 @@ export default function Page() {
                         <button className="p-3 rounded-full focus:outline-none">
                             <svg width="64px" height="64px" viewBox="0 0 24 24" className="w-4 h-4 text-gray-600"
                                  fill="none" xmlns="http://www.w3.org/2000/svg" transform="matrix(-1, 0, 0, 1, 0, 0)">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
                                     <path
                                         d="M16.6598 14.6474C18.4467 13.4935 18.4467 10.5065 16.6598 9.35258L5.87083 2.38548C4.13419 1.26402 2 2.72368 2 5.0329V18.9671C2 21.2763 4.13419 22.736 5.87083 21.6145L16.6598 14.6474Z"
@@ -33,8 +33,8 @@ export default function Page() {
                         <button className="p-4 rounded-full bg-black bg-opacity-10 focus:outline-none mx-4">
                             <svg width="64px" height="64px" viewBox="0 0 24 24" className="w-6 h-6 text-gray-600"
                                  fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
                                     <path
                                         d="M2 6C2 4.11438 2 3.17157 2.58579 2.58579C3.17157 2 4.11438 2 6 2C7.88562 2 8.82843 2 9.41421 2.58579C10 3.17157 10 4.11438 10 6V18C10 19.8856 10 20.8284 9.41421 21.4142C8.82843 22 7.88562 22 6 22C4.11438 22 3.17157 22 2.58579 21.4142C2 20.8284 2 19.8856 2 18V6Z"
@@ -48,8 +48,8 @@ export default function Page() {
                         <button className="p-3 rounded-full focus:outline-none">
                             <svg width="64px" height="64px" viewBox="0 0 24 24" className="w-4 h-4 text-gray-600"
                                  fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
                                     <path
                                         d="M16.6598 14.6474C18.4467 13.4935 18.4467 10.5065 16.6598 9.35258L5.87083 2.38548C4.13419 1.26402 2 2.72368 2 5.0329V18.9671C2 21.2763 4.13419 22.736 5.87083 21.6145L16.6598 14.6474Z"
