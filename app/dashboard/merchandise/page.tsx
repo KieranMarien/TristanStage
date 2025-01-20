@@ -1,6 +1,5 @@
-import { ProductsList } from 'components/product-list-grid';
-import { RecommendedProductsList } from '@/components/recommended-product-list-grid';
-import { FilterButtons } from "@/components/FilterButtons";
+import { ProductsMerchList } from 'components/product-merch-list-grid';
+import { RecommendedProductsList } from '@/components/recommended-merch-product-list-grid';
 
 export default function Page() {
     return (
@@ -15,7 +14,7 @@ export default function Page() {
                 <h2 className="text-3xl font-bold mb-8 ml-28">Discover</h2>
             </div>
             <div>
-                <ProductsList/>
+                <ProductsMerchList/>
             </div>
         </div>
     )

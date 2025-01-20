@@ -1,7 +1,6 @@
-import { ProductsList } from 'components/product-list-grid';
-import { RecommendedProductsList } from '@/components/recommended-product-list-grid';
-import { BarChart } from 'components/Chart';
-import { FilterButtons } from "@/components/FilterButtons";
+import { ProductsBooksList } from 'components/product-books-list-grid';
+import { RecommendedProductsList } from '@/components/recommended-merch-product-list-grid';
+import { BarChart } from 'components/product-books-list-grid';
 
 export default function Page() {
     return (
@@ -19,7 +18,7 @@ export default function Page() {
                 </div>
             </div>
             <div>
-                <ProductsList/>
+                <ProductsBooksList/>
             </div>
         </div>
     )
