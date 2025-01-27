@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useState, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { useRef, useState, Suspense, useEffect } from 'react';
+import { Canvas, useThree } from '@react-three/fiber';  // Import useThree
 import { useGLTF } from '@react-three/drei';
 import { useRouter } from 'next/navigation';
 import * as THREE from 'three';
@@ -10,13 +10,29 @@ import CameraHandler from './CameraHandler';
 
 const Model = ({ cameraRefs, onObjectClick }) => {
     const { scene } = useGLTF('/models/NavigationTower.gltf');
+    const { set } = useThree();  // Get the 'set' function from useThree to modify the camera
+    const [cameraSet, setCameraSet] = useState(false); // State flag to check if camera is set
 
-    React.useEffect(() => {
-        // Only run once when the scene is initialized
+    useEffect(() => {
+        if (cameraSet) return;  // Prevent setting the camera more than once
+
+        let cameraFound = false; // Flag to ensure we set the camera only once
+
+        // Traverse the scene to find the cameras and other objects
         scene.traverse((node) => {
             if (node.isCamera) {
-                cameraRefs.current[node.name] = node; // Collect cameras in the scene
+                // Store all cameras in the cameraRefs object
+                cameraRefs.current[node.name] = node;
+
+                // Set the starting camera if Tower1ViewCamera is found
+                if (node.name === 'Tower1ViewCamera' && !cameraFound) {
+                    set({ camera: node });
+                    cameraFound = true;
+                    setCameraSet(true); // Mark the camera as set
+                    console.log('Set Tower1ViewCamera as starting camera');
+                }
             }
+
             const clickableObjects = {
                 Carpet1: 'Carpet1 clicked! Redirecting to /dashboard',
                 Plane004_1: 'TV clicked! Redirecting to /dashboard',
@@ -32,7 +48,7 @@ const Model = ({ cameraRefs, onObjectClick }) => {
                 console.log(`Clickable Object Assigned: ${node.name}`);
             }
         });
-    }, [scene, cameraRefs, onObjectClick]); // Add scene as a dependency to ensure it only runs when the scene changes
+    }, [scene, cameraRefs, onObjectClick, set, cameraSet]); // Add the 'cameraSet' dependency to control setting only once
 
     return <primitive object={scene} />;
 };
