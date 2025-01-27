@@ -11,8 +11,9 @@ const CameraHandler = ({ cameraRefs, onSwitchCamera }) => {
             camera.position.copy(targetCamera.position);
             camera.rotation.copy(targetCamera.rotation);
             camera.updateProjectionMatrix();
+            console.log(`Switched to ${cameraName}`);
         } else {
-            console.warn(`Camera "${cameraName}" not found.`);
+            console.log(`Camera "${cameraName}" not found.`);
         }
     };
 

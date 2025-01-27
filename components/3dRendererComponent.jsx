@@ -14,30 +14,29 @@ const Model = ({ cameraRefs, onObjectClick }) => {
     const [cameraSet, setCameraSet] = useState(false); // State flag to check if camera is set
 
     useEffect(() => {
-        if (cameraSet) return;  // Prevent setting the camera more than once
+        if (cameraSet) return;
 
-        let cameraFound = false; // Flag to ensure we set the camera only once
-
-        // Traverse the scene to find the cameras and other objects
         scene.traverse((node) => {
             if (node.isCamera) {
-                // Store all cameras in the cameraRefs object
                 cameraRefs.current[node.name] = node;
 
-                // Set the starting camera if Tower1ViewCamera is found
-                if (node.name === 'Tower1ViewCamera' && !cameraFound) {
+                if (node.name === 'Tower1ViewCamera' && !cameraSet) {
                     set({ camera: node });
-                    cameraFound = true;
-                    setCameraSet(true); // Mark the camera as set
+                    cameraRefs.current.activeCamera = node; // Set active camera
+                    setCameraSet(true);
                     console.log('Set Tower1ViewCamera as starting camera');
                 }
             }
 
+            // Assign click handlers to objects
             const clickableObjects = {
-                Carpet1: 'Carpet1 clicked! Redirecting to /dashboard',
                 Plane004_1: 'TV clicked! Redirecting to /dashboard',
-                Cylinder016: 'MerchCarpet clicked! Redirecting to /merchandise',
-                MatLogo: 'MerchCarpet clicked! Redirecting to /merchandise',
+                GuitarPlane: 'Guitar clicked! Redirecting to /music',
+                GuitarPlane001: 'Guitar clicked! Redirecting to /music',
+                GuitarPlane006: 'Guitar clicked! Redirecting to /music',
+                Cube112: 'Book clicked! Redirecting to /books',
+                Cube049: 'Clock clicked! Redirecting to /books',
+                NurbsPath: 'MerchCarpet clicked! Redirecting to /merchandise',
             };
 
             if (node.isMesh && clickableObjects[node.name] && !node.userData.onClick) {
@@ -67,8 +66,16 @@ const MyModel = () => {
 
     const handleClick = () => {
         const raycaster = raycasterRef.current;
+
+        // Ensure activeCamera and scene are set
+        if (!cameraRefs.current.activeCamera || !cameraRefs.current.scene) {
+            console.warn('Active camera or scene is missing!');
+            return;
+        }
+
         raycaster.setFromCamera(pointerRef.current, cameraRefs.current.activeCamera);
 
+        // Ensure raycaster checks against the correct scene objects
         const intersects = raycaster.intersectObjects(cameraRefs.current.scene.children, true);
         if (intersects.length > 0) {
             const clickedObject = intersects[0].object;
@@ -85,10 +92,13 @@ const MyModel = () => {
     const handleObjectClick = (objectName) => {
         console.log(`handleObjectClick executed for: ${objectName}`);
         const redirectMap = {
-            Carpet1: '/dashboard',
             Plane004_1: '/dashboard',
-            Cylinder016: '/dashboard/merchandise',
-            MatLogo: '/dashboard/merchandise',
+            Cube112: '/dashboard/books',
+            Cube049: '/dashboard/books',
+            GuitarPlane: '/dashboard/music',
+            GuitarPlane001: '/dashboard/music',
+            GuitarPlane006: '/dashboard/music',
+            NurbsPath: '/dashboard/merchandise',
         };
 
         const redirectTo = redirectMap[objectName];
