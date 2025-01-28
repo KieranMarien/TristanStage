@@ -30,13 +30,13 @@ const Model = ({ cameraRefs, onObjectClick }) => {
 
             // Assign click handlers to objects
             const clickableObjects = {
-                Plane004_1: 'TV clicked! Redirecting to /dashboard',
-                GuitarPlane: 'Guitar clicked! Redirecting to /music',
-                GuitarPlane001: 'Guitar clicked! Redirecting to /music',
-                GuitarPlane006: 'Guitar clicked! Redirecting to /music',
-                Cube112: 'Book clicked! Redirecting to /books',
-                Cube049: 'Clock clicked! Redirecting to /books',
-                NurbsPath: 'MerchCarpet clicked! Redirecting to /merchandise',
+                ArrowGoBack: 'Arrow clicked! Redirecting to /dashboard',
+                ArrowBooks: 'Arrow clicked! Redirecting to /books',
+                TextBooks: 'Title clicked! Redirecting to /books',
+                ArrowMusic: 'Arrow clicked! Redirecting to /music',
+                TextMusic: 'Title clicked! Redirecting to /music',
+                ArrowMerch: 'Arrow clicked! Redirecting to /merchandise',
+                textMerch: 'Title clicked! Redirecting to /merchandise',
             };
 
             if (node.isMesh && clickableObjects[node.name] && !node.userData.onClick) {
@@ -92,13 +92,13 @@ const MyModel = () => {
     const handleObjectClick = (objectName) => {
         console.log(`handleObjectClick executed for: ${objectName}`);
         const redirectMap = {
-            Plane004_1: '/dashboard',
-            Cube112: '/dashboard/books',
-            Cube049: '/dashboard/books',
-            GuitarPlane: '/dashboard/music',
-            GuitarPlane001: '/dashboard/music',
-            GuitarPlane006: '/dashboard/music',
-            NurbsPath: '/dashboard/merchandise',
+            ArrowGoBack: '/dashboard',
+            ArrowBooks: '/dashboard/books',
+            TextBooks: '/dashboard/books',
+            ArrowMusic: '/dashboard/music',
+            TextMusic: '/dashboard/music',
+            ArrowMerch: '/dashboard/merchandise',
+            textMerch: '/dashboard/merchandise',
         };
 
         const redirectTo = redirectMap[objectName];

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import NavLinks from 'components/nav-links';
 
 export function HeaderNav() {
@@ -6,8 +5,8 @@ export function HeaderNav() {
         <div>
             <nav className="bg-transparent border-gray-200 font-tommy">
                 <div className="max-w-screen-xl justify-between flex flex-wrap items-center mx-auto p-4">
-                    <div>
-                        <a href="/dashboard" className="flex space-x-3 rtl:space-x-reverse">
+                    <div className="mr-60">
+                        <a href="/dashboard" className="flex space-x-3 rtl:space-x-reverse mr-96">
                             <img src="/AppFoundryTitle.png" className="h-8" alt="AppFoundry Title"/>
                         </a>
                     </div>
