@@ -4,7 +4,6 @@ import { productsMerchandise } from '@/app/lib/product-data-tables';
 const productsMerch2 = await productsMerchandise;
 
 
-
 export async function ProductsMerchList() {
     return (
         <div className="bg-transparent font-tommy">

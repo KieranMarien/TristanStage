@@ -261,7 +261,7 @@ const RecommendedMerchProducts = [
   },
   {
     id: 2,
-    name: 'Basic Tee',
+    name: 'Black Tee',
     href: '#',
     rating: 4,
     imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg',
@@ -270,7 +270,7 @@ const RecommendedMerchProducts = [
   },
   {
     id: 3,
-    name: 'Basic Tee',
+    name: 'White Tee',
     href: '#',
     rating: 4,
     imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg',
@@ -278,7 +278,7 @@ const RecommendedMerchProducts = [
   },
   {
     id: 4,
-    name: 'Basic Tee',
+    name: 'Green Tee',
     href: '#',
     rating: 4,
     imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg',

@@ -5,7 +5,7 @@ import { Canvas, useThree } from '@react-three/fiber';  // Import useThree
 import { useGLTF } from '@react-three/drei';
 import { useRouter } from 'next/navigation';
 import * as THREE from 'three';
-import CameraButtons from './CameraButtons';
+import CameraNavigation from './CameraNavigation';
 import CameraHandler from './CameraHandler';
 
 const Model = ({ cameraRefs, onObjectClick }) => {
@@ -134,7 +134,7 @@ const MyModel = () => {
             </Canvas>
 
             {/* Pass switchCameraFunc to the CameraButtons */}
-            <CameraButtons onSwitchCamera={switchCameraFunc} />
+            <CameraNavigation onSwitchCamera={switchCameraFunc} />
         </div>
     );
 };

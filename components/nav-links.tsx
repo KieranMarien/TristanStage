@@ -22,7 +22,7 @@ export default function NavLinks() {
                         key={link.name}
                         href={link.href}
                         className={clsx(
-                            'flex flex-row h-[48px] grow items-center justify-center gap-5 rounded-md p-3 mr-16 text-sm font-medium bg-beige-background hover:bg-sky-100 hover:text-blue-600 md:p-2 md:px-3',
+                            'flex flex-row h-[48px] grow items-center justify-center gap-5 rounded-md p-3 mr-16 text-sm font-medium bg-beige-background hover:bg-black hover:text-beige-background md:p-2 md:px-3',
                             {
                                 'text-blue-600': pathname === link.href,
                             },

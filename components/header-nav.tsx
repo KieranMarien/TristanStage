@@ -12,9 +12,9 @@ export function HeaderNav() {
                     </div>
                     <div className="flex flex-row">
                         <NavLinks/>
-                        <div className="w-10 h-10 mr-6 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                        <div className="w-10 h-10 mr-6 overflow-hidden bg-gray-100 rounded-full">
                             <a href="/dashboard/profile">
-                                <svg className="w-12 h-12 text-gray-400" fill="currentColor"
+                                <svg className="w-12 h-12 text-gray-400 hover:bg-black hover:text-white" fill="currentColor"
                                      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
                                 </svg>

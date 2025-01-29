@@ -1,5 +1,4 @@
 import { Product } from 'types/product';
-import { ProductBestSeller } from 'components/product-best-seller';
 import { ProductRating } from 'components/product-rating';
 import Image from 'next/image';
 
@@ -10,11 +9,6 @@ export const ProductCard = ({ product }: { product: Product }) => {
           <a href="./merchandise-detail" className="">
               <div className="space-y-2 font-tommy">
                   <div className="relative aspect-square">
-                      {product.isBestSeller ? (
-                          <div className="absolute left-2 top-2 z-10 flex">
-                              <ProductBestSeller/>
-                          </div>
-                      ) : null}
                       <Image
                           src={`/${product.image}`}
                           fill
