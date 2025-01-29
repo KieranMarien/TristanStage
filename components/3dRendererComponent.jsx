@@ -20,11 +20,11 @@ const Model = ({ cameraRefs, onObjectClick }) => {
             if (node.isCamera) {
                 cameraRefs.current[node.name] = node;
 
-                if (node.name === 'Tower1ViewCamera' && !cameraSet) {
+                if (node.name === 'Tower0ViewCamera' && !cameraSet) {
                     set({ camera: node });
                     cameraRefs.current.activeCamera = node; // Set active camera
                     setCameraSet(true);
-                    console.log('Set Tower1ViewCamera as starting camera');
+                    console.log('Set Tower0ViewCamera as starting camera');
                 }
             }
 

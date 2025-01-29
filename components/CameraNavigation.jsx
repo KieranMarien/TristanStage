@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const CameraNavigation = ({ onSwitchCamera }) => {
     const cameras = [
+        { id: 0, name: 'Tower0ViewCamera', floorName:'Overview' },
         { id: 1, name: 'Tower1ViewCamera', floorName:'Home' },
         { id: 2, name: 'Tower2ViewCamera', floorName:'Music' },
         { id: 3, name: 'Tower3ViewCamera', floorName:'Books' },
