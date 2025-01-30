@@ -9,7 +9,7 @@ import CameraNavigation from './CameraNavigation';
 import CameraHandler from './CameraHandler';
 
 const Model = ({ cameraRefs, onObjectClick }) => {
-    const { scene } = useGLTF('https://tristan-stage.s3.eu-west-1.amazonaws.com/Navigation+Tower+Optimized.glb');
+    const { scene } = useGLTF('https://tristan-stage.s3.eu-west-1.amazonaws.com/Navigation+Tower.gltf');
     const { set } = useThree();  // Get the 'set' function from useThree to modify the camera
     const [cameraSet, setCameraSet] = useState(false); // State flag to check if camera is set
 
