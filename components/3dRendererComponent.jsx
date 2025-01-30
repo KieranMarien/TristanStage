@@ -10,6 +10,7 @@ import CameraHandler from './CameraHandler';
 
 const Model = ({ cameraRefs, onObjectClick }) => {
     const [gltf, setGltf] = useState(null);
+    const [cameraSet, setCameraSet] = useState(false);
 
     useEffect(() => {
         const loadModel = async () => {
@@ -53,14 +54,10 @@ const Model = ({ cameraRefs, onObjectClick }) => {
         loadModel();
     }, []);
 
-    if (!gltf) return null; // Show nothing while loading
-
-    const { scene } = gltf;
-    const [cameraSet, setCameraSet] = useState(false);
-
     useEffect(() => {
-        if (cameraSet) return;
+        if (!gltf || cameraSet) return;
 
+        const { scene } = gltf;
         scene.traverse((node) => {
             if (node.isCamera) {
                 cameraRefs.current[node.name] = node;
@@ -89,9 +86,11 @@ const Model = ({ cameraRefs, onObjectClick }) => {
                 console.log(`Clickable Object Assigned: ${node.name}`);
             }
         });
-    }, [scene, cameraRefs, onObjectClick, cameraSet]);
+    }, [gltf, cameraRefs, onObjectClick, cameraSet]);
 
-    return <primitive object={scene} />;
+    if (!gltf) return null; // Show nothing while loading
+
+    return <primitive object={gltf.scene} />;
 };
 
 const MyModel = () => {
