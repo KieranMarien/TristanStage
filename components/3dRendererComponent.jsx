@@ -1,17 +1,62 @@
 'use client';
 
 import React, { useRef, useState, Suspense, useEffect } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';  // Import useThree
-import { useGLTF } from '@react-three/drei';
+import { Canvas, } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useRouter } from 'next/navigation';
 import * as THREE from 'three';
 import CameraNavigation from './CameraNavigation';
 import CameraHandler from './CameraHandler';
 
 const Model = ({ cameraRefs, onObjectClick }) => {
-    const { scene } = useGLTF('https://tristan-stage.s3.eu-west-1.amazonaws.com/Navigation+Tower.gltf');
-    const { set } = useThree();  // Get the 'set' function from useThree to modify the camera
-    const [cameraSet, setCameraSet] = useState(false); // State flag to check if camera is set
+    const [gltf, setGltf] = useState(null);
+
+    useEffect(() => {
+        const loadModel = async () => {
+            try {
+                // Fetch the .gltf file
+                const response = await fetch('/models/NavigationTower.gltf');
+                if (!response.ok) throw new Error(`Failed to fetch .gltf: ${response.statusText}`);
+                let gltfJson = await response.json();
+
+                // Update the .bin reference to external S3 link
+                gltfJson.buffers.forEach((buffer) => {
+                    if (buffer.uri.endsWith('.bin')) {
+                        console.log(`Redirecting buffer ${buffer.uri} to external URL`);
+                        buffer.uri = "https://tristan-stage.s3.eu-west-1.amazonaws.com/NavigationTower/NavigationTower.bin";
+                    }
+                });
+
+                // Convert the modified JSON back to a Blob
+                const blob = new Blob([JSON.stringify(gltfJson)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+
+                // Load the model using GLTFLoader
+                const loader = new GLTFLoader();
+                loader.setCrossOrigin('anonymous');
+                loader.setResourcePath('/models/'); // Ensure textures are loaded correctly
+
+                loader.load(
+                    url,
+                    (gltf) => {
+                        setGltf(gltf);
+                        console.log('GLTF Loaded Successfully');
+                    },
+                    undefined,
+                    (error) => console.error('Error loading GLTF:', error)
+                );
+            } catch (error) {
+                console.error('Error loading .gltf:', error);
+            }
+        };
+
+        loadModel();
+    }, []);
+
+    if (!gltf) return null; // Show nothing while loading
+
+    const { scene } = gltf;
+    const [cameraSet, setCameraSet] = useState(false);
 
     useEffect(() => {
         if (cameraSet) return;
@@ -19,35 +64,32 @@ const Model = ({ cameraRefs, onObjectClick }) => {
         scene.traverse((node) => {
             if (node.isCamera) {
                 cameraRefs.current[node.name] = node;
-
                 if (node.name === 'Tower0ViewCamera' && !cameraSet) {
-                    set({ camera: node });
-                    cameraRefs.current.activeCamera = node; // Set active camera
+                    cameraRefs.current.activeCamera = node;
                     setCameraSet(true);
                     console.log('Set Tower0ViewCamera as starting camera');
                 }
             }
 
-            // Assign click handlers to objects
             const clickableObjects = {
-                ArrowGoBack: 'Arrow clicked! Redirecting to /dashboard',
-                ArrowBooks: 'Arrow clicked! Redirecting to /books',
-                TextBooks: 'Title clicked! Redirecting to /books',
-                ArrowMusic: 'Arrow clicked! Redirecting to /music',
-                TextMusic: 'Title clicked! Redirecting to /music',
-                ArrowMerch: 'Arrow clicked! Redirecting to /merchandise',
-                textMerch: 'Title clicked! Redirecting to /merchandise',
+                ArrowGoBack: '/dashboard',
+                ArrowBooks: '/dashboard/books',
+                TextBooks: '/dashboard/books',
+                ArrowMusic: '/dashboard/music',
+                TextMusic: '/dashboard/music',
+                ArrowMerch: '/dashboard/merchandise',
+                textMerch: '/dashboard/merchandise',
             };
 
             if (node.isMesh && clickableObjects[node.name] && !node.userData.onClick) {
                 node.userData.onClick = () => {
-                    console.log(clickableObjects[node.name]);
+                    console.log(`Redirecting to ${clickableObjects[node.name]}`);
                     onObjectClick(node.name);
                 };
                 console.log(`Clickable Object Assigned: ${node.name}`);
             }
         });
-    }, [scene, cameraRefs, onObjectClick, set, cameraSet]); // Add the 'cameraSet' dependency to control setting only once
+    }, [scene, cameraRefs, onObjectClick, cameraSet]);
 
     return <primitive object={scene} />;
 };
@@ -66,21 +108,16 @@ const MyModel = () => {
 
     const handleClick = () => {
         const raycaster = raycasterRef.current;
-
-        // Ensure activeCamera and scene are set
         if (!cameraRefs.current.activeCamera || !cameraRefs.current.scene) {
             console.warn('Active camera or scene is missing!');
             return;
         }
 
         raycaster.setFromCamera(pointerRef.current, cameraRefs.current.activeCamera);
-
-        // Ensure raycaster checks against the correct scene objects
         const intersects = raycaster.intersectObjects(cameraRefs.current.scene.children, true);
         if (intersects.length > 0) {
             const clickedObject = intersects[0].object;
             console.log('Intersected Object:', clickedObject.name);
-
             if (clickedObject.userData.onClick) {
                 clickedObject.userData.onClick();
             }
@@ -90,7 +127,6 @@ const MyModel = () => {
     };
 
     const handleObjectClick = (objectName) => {
-        console.log(`handleObjectClick executed for: ${objectName}`);
         const redirectMap = {
             ArrowGoBack: '/dashboard',
             ArrowBooks: '/dashboard/books',
@@ -101,11 +137,8 @@ const MyModel = () => {
             textMerch: '/dashboard/merchandise',
         };
 
-        const redirectTo = redirectMap[objectName];
-
-        if (redirectTo) {
-            console.log(`Redirecting to ${redirectTo}`);
-            router.push(redirectTo);
+        if (redirectMap[objectName]) {
+            router.push(redirectMap[objectName]);
         }
     };
 
@@ -115,13 +148,11 @@ const MyModel = () => {
             onMouseMove={handlePointerMove}
             onClick={handleClick}
         >
-
             <Canvas
                 camera={{ position: [0, 0, 5], fov: 75 }}
                 onCreated={({ scene, camera }) => {
                     cameraRefs.current.scene = scene;
                     cameraRefs.current.activeCamera = camera;
-                    console.log('Scene and Camera Initialized:', { scene, camera });
                 }}
             >
                 <Suspense fallback={null}>
@@ -132,8 +163,6 @@ const MyModel = () => {
                     onSwitchCamera={(func) => setSwitchCameraFunc(() => func)}
                 />
             </Canvas>
-
-            {/* Pass switchCameraFunc to the CameraButtons */}
             <CameraNavigation onSwitchCamera={switchCameraFunc} />
         </div>
     );
